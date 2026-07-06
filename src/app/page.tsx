@@ -1,27 +1,25 @@
 import { Hero } from "@/components/sections/Hero";
-import { TrustBadges } from "@/components/sections/TrustBadges";
+import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
-import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { Technology } from "@/components/sections/Technology";
 import { Doctors } from "@/components/sections/Doctors";
 import { Process } from "@/components/sections/Process";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { Gallery } from "@/components/sections/Gallery";
+import { Reviews } from "@/components/sections/Reviews";
 import { FAQ } from "@/components/sections/FAQ";
-import { Contact } from "@/components/sections/Contact";
+import { Appointment } from "@/components/sections/Appointment";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <TrustBadges />
+      <About />
       <Services />
-      <WhyChooseUs />
+      <Technology />
       <Doctors />
       <Process />
-      <Testimonials />
-      <Gallery />
+      <Reviews />
       <FAQ />
-      <Contact />
+      <Appointment />
     </>
   );
 }

@@ -1,58 +1,76 @@
 "use client";
 
-import { ReactNode } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { fadeUp } from "@/lib/motion";
 
-type Direction = "up" | "left" | "right" | "scale" | "none";
-
-const variantsMap: Record<Direction, Variants> = {
-  up: {
-    hidden: { opacity: 0, y: 32 },
-    show: { opacity: 1, y: 0 },
-  },
-  left: {
-    hidden: { opacity: 0, x: -32 },
-    show: { opacity: 1, x: 0 },
-  },
-  right: {
-    hidden: { opacity: 0, x: 32 },
-    show: { opacity: 1, x: 0 },
-  },
-  scale: {
-    hidden: { opacity: 0, scale: 0.92 },
-    show: { opacity: 1, scale: 1 },
-  },
-  none: {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
-  },
+type RevealProps = {
+  children: React.ReactNode;
+  className?: string;
+  variants?: Variants;
+  delay?: number;
+  as?: "div" | "section" | "li" | "span";
 };
 
+/** Обгортка появи при скролі: fade + підйом + зняття блюру. */
 export function Reveal({
   children,
-  direction = "up",
-  delay = 0,
-  duration = 0.6,
   className,
-  once = true,
+  variants = fadeUp,
+  delay = 0,
+  as = "div",
+}: RevealProps) {
+  const Tag = motion[as];
+  return (
+    <Tag
+      className={className}
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ delay }}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+/** Контейнер, що по черзі показує дочірні motion-елементи. */
+export function RevealGroup({
+  children,
+  className,
+  stagger = 0.09,
 }: {
-  children: ReactNode;
-  direction?: Direction;
-  delay?: number;
-  duration?: number;
+  children: React.ReactNode;
   className?: string;
-  once?: boolean;
+  stagger?: number;
 }) {
-  const variants = variantsMap[direction];
   return (
     <motion.div
       className={className}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once, amount: 0.25 }}
-      variants={variants}
-      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: stagger } },
+      }}
     >
+      {children}
+    </motion.div>
+  );
+}
+
+export function RevealItem({
+  children,
+  className,
+  variants = fadeUp,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  variants?: Variants;
+}) {
+  return (
+    <motion.div className={className} variants={variants}>
       {children}
     </motion.div>
   );

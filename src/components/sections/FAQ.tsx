@@ -3,68 +3,109 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
-import clsx from "clsx";
-import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal } from "@/components/ui/Reveal";
-import { faqs } from "@/lib/data";
+import { brand, faqs } from "@/lib/data";
+import { EASE } from "@/lib/motion";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-white py-24 sm:py-32">
-      <Container className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr]">
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Answers before you ask."
-          description="Can't find what you're looking for? Reach out and our patient coordinators will help directly."
-          align="left"
-        />
+    <section id="faq" className="relative py-24 lg:py-32">
+      <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-12">
+        {/* Липка колонка */}
+        <div className="lg:col-span-5">
+          <div className="lg:sticky lg:top-32">
+            <Reveal>
+              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-deep-600">
+                <span className="font-display">07</span>
+                <span aria-hidden className="h-px w-10 bg-deep-600/40" />
+                Питання
+              </p>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="font-display mt-6 max-w-md text-3xl font-medium leading-[1.12] tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
+                Те, про що питають найчастіше
+              </h2>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <p className="mt-6 max-w-sm leading-relaxed text-ink-500">
+                Не знайшли своєї відповіді? Зателефонуйте — адміністраторка
+                відповість на все, що вас хвилює.
+              </p>
+            </Reveal>
+            <Reveal delay={0.24}>
+              <a
+                href={brand.phoneHref}
+                className="group mt-7 inline-flex items-center gap-2 font-display text-xl font-medium text-deep-800 transition-colors hover:text-deep-600"
+              >
+                {brand.phone}
+                <span
+                  aria-hidden
+                  className="block h-px w-10 bg-cyan-500 transition-all duration-300 group-hover:w-16"
+                />
+              </a>
+            </Reveal>
+          </div>
+        </div>
 
-        <div className="flex flex-col divide-y divide-line border-t border-b border-line">
+        {/* Акордеон */}
+        <RevealGroup className="lg:col-span-7" stagger={0.06}>
           {faqs.map((faq, i) => {
-            const isOpen = openIndex === i;
+            const isOpen = open === i;
             return (
-              <Reveal key={faq.question} delay={i * 0.05}>
-                <div>
+              <RevealItem key={faq.question}>
+                <div
+                  className={`border-t border-mist-300 transition-colors duration-300 last:border-b ${
+                    isOpen ? "bg-white/70" : ""
+                  }`}
+                >
                   <button
-                    onClick={() => setOpenIndex(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-6 py-6 text-left"
+                    type="button"
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-center justify-between gap-6 px-2 py-6 text-left sm:px-4"
                   >
-                    <span className="font-display text-lg text-primary-950">
+                    <span
+                      className={`font-display text-lg font-medium tracking-tight transition-colors duration-300 sm:text-xl ${
+                        isOpen ? "text-deep-700" : "text-ink-900"
+                      }`}
+                    >
                       {faq.question}
                     </span>
-                    <span
-                      className={clsx(
-                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line transition-all duration-300",
-                        isOpen && "rotate-45 border-secondary-400 bg-secondary-200/40"
-                      )}
+                    <motion.span
+                      animate={{ rotate: isOpen ? 135 : 0 }}
+                      transition={{ duration: 0.4, ease: EASE }}
+                      className={`grid size-10 shrink-0 place-items-center rounded-full border transition-colors duration-300 ${
+                        isOpen
+                          ? "border-deep-700 bg-deep-800 text-cyan-300"
+                          : "border-mist-300 text-ink-700"
+                      }`}
                     >
-                      <Plus className="h-4 w-4 text-primary-800" />
-                    </span>
+                      <Plus className="size-4.5" aria-hidden />
+                    </motion.span>
                   </button>
                   <AnimatePresence initial={false}>
-                    {isOpen && (
+                    {isOpen ? (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.45, ease: EASE }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-6 pr-14 text-sm leading-relaxed text-ink-600">
+                        <p className="max-w-2xl px-2 pb-7 leading-relaxed text-ink-500 sm:px-4">
                           {faq.answer}
                         </p>
                       </motion.div>
-                    )}
+                    ) : null}
                   </AnimatePresence>
                 </div>
-              </Reveal>
+              </RevealItem>
             );
           })}
-        </div>
-      </Container>
+        </RevealGroup>
+      </div>
     </section>
   );
 }

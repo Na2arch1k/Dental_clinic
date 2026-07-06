@@ -1,84 +1,69 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0b1e33;
+  --background: #f3f7fa;
+  --foreground: #0c1a2c;
 
-  /* Primary — Deep Blue */
-  --color-primary-950: #050f24;
-  --color-primary-900: #0a2647;
-  --color-primary-800: #0e3560;
-  --color-primary-700: #124478;
-  --color-primary-600: #175591;
-  --color-primary-500: #1f6bae;
+  /* Deep medical blue */
+  --color-deep-950: #040c19;
+  --color-deep-900: #07172e;
+  --color-deep-800: #0b2347;
+  --color-deep-700: #113463;
+  --color-deep-600: #174a82;
+  --color-deep-500: #1f62a6;
 
-  /* Secondary — Sky Blue */
-  --color-secondary-500: #3b9fe0;
-  --color-secondary-400: #5cb3e8;
-  --color-secondary-300: #8fcbef;
-  --color-secondary-200: #c3e4f7;
+  /* Soft cyan accent */
+  --color-cyan-500: #29c1cf;
+  --color-cyan-400: #55dbe4;
+  --color-cyan-300: #92ebf0;
+  --color-cyan-200: #c9f6f8;
 
-  /* Accent — Soft Cyan */
-  --color-accent-500: #4bd4dc;
-  --color-accent-400: #74e0e6;
-  --color-accent-300: #a6ecf0;
-  --color-accent-200: #d4f7f8;
+  /* Cool neutrals */
+  --color-mist-50: #f9fbfd;
+  --color-mist-100: #eff4f8;
+  --color-mist-200: #e2eaf1;
+  --color-mist-300: #ccd9e4;
+  --color-mist-400: #9db1c3;
+  --color-mist-500: #6c8298;
 
-  /* Neutrals */
-  --color-ink-900: #0b1e33;
-  --color-ink-700: #26425e;
-  --color-ink-600: #45607a;
-  --color-ink-400: #7c93a8;
-  --color-surface: #f5f8fb;
-  --color-surface-alt: #eef4f9;
-  --color-line: #e1eaf1;
+  --color-ink-900: #0c1a2c;
+  --color-ink-700: #2b4157;
+  --color-ink-500: #51687d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --color-primary-950: var(--color-primary-950);
-  --color-primary-900: var(--color-primary-900);
-  --color-primary-800: var(--color-primary-800);
-  --color-primary-700: var(--color-primary-700);
-  --color-primary-600: var(--color-primary-600);
-  --color-primary-500: var(--color-primary-500);
+  --color-deep-950: var(--color-deep-950);
+  --color-deep-900: var(--color-deep-900);
+  --color-deep-800: var(--color-deep-800);
+  --color-deep-700: var(--color-deep-700);
+  --color-deep-600: var(--color-deep-600);
+  --color-deep-500: var(--color-deep-500);
 
-  --color-secondary-500: var(--color-secondary-500);
-  --color-secondary-400: var(--color-secondary-400);
-  --color-secondary-300: var(--color-secondary-300);
-  --color-secondary-200: var(--color-secondary-200);
+  --color-cyan-500: var(--color-cyan-500);
+  --color-cyan-400: var(--color-cyan-400);
+  --color-cyan-300: var(--color-cyan-300);
+  --color-cyan-200: var(--color-cyan-200);
 
-  --color-accent-500: var(--color-accent-500);
-  --color-accent-400: var(--color-accent-400);
-  --color-accent-300: var(--color-accent-300);
-  --color-accent-200: var(--color-accent-200);
+  --color-mist-50: var(--color-mist-50);
+  --color-mist-100: var(--color-mist-100);
+  --color-mist-200: var(--color-mist-200);
+  --color-mist-300: var(--color-mist-300);
+  --color-mist-400: var(--color-mist-400);
+  --color-mist-500: var(--color-mist-500);
 
   --color-ink-900: var(--color-ink-900);
   --color-ink-700: var(--color-ink-700);
-  --color-ink-600: var(--color-ink-600);
-  --color-ink-400: var(--color-ink-400);
-  --color-surface: var(--color-surface);
-  --color-surface-alt: var(--color-surface-alt);
-  --color-line: var(--color-line);
+  --color-ink-500: var(--color-ink-500);
 
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-inter);
+  --font-display: var(--font-unbounded);
+  --font-sans: var(--font-manrope);
 
-  --animate-fade-up: fade-up 0.7s ease-out both;
-  --animate-marquee: marquee 32s linear infinite;
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-late: float 9s ease-in-out 1.5s infinite;
 
   @keyframes marquee {
     from {
@@ -88,38 +73,91 @@
       transform: translateX(-50%);
     }
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-::selection {
-  background: var(--color-accent-300);
-  color: var(--color-primary-900);
+/* Якорі не ховаються під фіксованою шапкою */
+[id] {
+  scroll-margin-top: 96px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: clip;
 }
 
 .font-display {
-  font-family: var(--font-display), ui-serif, Georgia, serif;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* subtle scrollbar for a premium feel */
+::selection {
+  background: var(--color-cyan-300);
+  color: var(--color-deep-900);
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: var(--color-mist-100);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-secondary-300);
+  background: var(--color-deep-700);
   border-radius: 999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-secondary-400);
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Живий фон: дрібна зернистість поверх градієнтів */
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Контурний текст для гігантського вордмарку */
+.text-stroke-light {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.16);
+  color: transparent;
+}
+
+.text-stroke-deep {
+  -webkit-text-stroke: 1.5px rgba(11, 35, 71, 0.18);
+  color: transparent;
+}
+
+/* Пауза marquee при наведенні */
+.marquee-track:hover > * {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,108 +1,64 @@
 "use client";
 
-import { ReactNode, MouseEvent, useState } from "react";
-import clsx from "clsx";
+import Link from "next/link";
+import { clsx } from "clsx";
+import { ArrowUpRight } from "lucide-react";
+import { Magnetic } from "@/components/ui/Magnetic";
 
-type Ripple = { x: number; y: number; size: number; id: number };
+type ButtonProps = {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "light" | "ghost" | "outline-light";
+  className?: string;
+  withArrow?: boolean;
+  magnetic?: boolean;
+};
+
+const base =
+  "group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300";
 
 const variants = {
   primary:
-    "bg-primary-800 text-white hover:bg-primary-700 shadow-lg shadow-primary-900/20",
-  secondary:
-    "bg-white text-primary-900 border border-line hover:border-secondary-400 hover:text-primary-800",
-  accent:
-    "bg-accent-400 text-primary-900 hover:bg-accent-300 shadow-lg shadow-accent-500/20",
+    "bg-deep-800 text-white shadow-[0_12px_32px_-12px_rgba(11,35,71,0.55)] hover:shadow-[0_18px_44px_-12px_rgba(41,193,207,0.45)] hover:bg-deep-700",
+  light:
+    "bg-white text-deep-900 shadow-[0_10px_30px_-14px_rgba(11,35,71,0.4)] hover:shadow-[0_16px_40px_-14px_rgba(255,255,255,0.35)]",
+  ghost:
+    "border border-mist-300 bg-white/40 text-ink-900 backdrop-blur hover:border-deep-600/40 hover:bg-white",
+  "outline-light":
+    "border border-white/25 text-white backdrop-blur hover:border-cyan-300/70 hover:text-cyan-200",
 };
 
+/** Кнопка з магнітним ховером, сяйвом і стрілкою, що «вилітає». */
 export function Button({
-  children,
-  className,
-  variant = "primary",
   href,
-  onClick,
-  type = "button",
-}: {
-  children: ReactNode;
-  className?: string;
-  variant?: keyof typeof variants;
-  href?: string;
-  onClick?: () => void;
-  type?: "button" | "submit";
-}) {
-  const [ripples, setRipples] = useState<Ripple[]>([]);
-
-  function spawnRipple(e: MouseEvent<HTMLElement>) {
-    const target = e.currentTarget as HTMLElement;
-    const rect = target.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height) * 2;
-    const ripple: Ripple = {
-      x: e.clientX - rect.left - size / 2,
-      y: e.clientY - rect.top - size / 2,
-      size,
-      id: Date.now(),
-    };
-    setRipples((prev) => [...prev, ripple]);
-    window.setTimeout(() => {
-      setRipples((prev) => prev.filter((r) => r.id !== ripple.id));
-    }, 650);
-  }
-
-  const classes = clsx(
-    "group relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-medium tracking-wide transition-all duration-300 ease-out active:scale-[0.97]",
-    variants[variant],
-    className
+  children,
+  variant = "primary",
+  className,
+  withArrow = true,
+  magnetic = true,
+}: ButtonProps) {
+  const inner = (
+    <Link href={href} className={clsx(base, variants[variant], className)}>
+      {/* Сяйво, що проходить по кнопці */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
+      />
+      <span className="relative">{children}</span>
+      {withArrow ? (
+        <span className="relative grid size-5 place-items-center overflow-hidden">
+          <ArrowUpRight
+            className="size-4 transition-transform duration-300 group-hover:-translate-y-5 group-hover:translate-x-5"
+            aria-hidden
+          />
+          <ArrowUpRight
+            className="absolute size-4 -translate-x-5 translate-y-5 transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0"
+            aria-hidden
+          />
+        </span>
+      ) : null}
+    </Link>
   );
 
-  const content = (
-    <>
-      <span className="relative z-10 flex items-center gap-2">{children}</span>
-      {ripples.map((r) => (
-        <span
-          key={r.id}
-          className="pointer-events-none absolute rounded-full bg-white/40 animate-[ripple_0.65s_ease-out]"
-          style={{ left: r.x, top: r.y, width: r.size, height: r.size }}
-        />
-      ))}
-      <style jsx>{`
-        @keyframes ripple {
-          from {
-            transform: scale(0);
-            opacity: 0.55;
-          }
-          to {
-            transform: scale(1);
-            opacity: 0;
-          }
-        }
-      `}</style>
-    </>
-  );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        onClick={(e) => {
-          spawnRipple(e);
-          onClick?.();
-        }}
-        className={classes}
-      >
-        {content}
-      </a>
-    );
-  }
-
-  return (
-    <button
-      type={type}
-      onClick={(e) => {
-        spawnRipple(e);
-        onClick?.();
-      }}
-      className={classes}
-    >
-      {content}
-    </button>
-  );
+  return magnetic ? <Magnetic>{inner}</Magnetic> : inner;
 }

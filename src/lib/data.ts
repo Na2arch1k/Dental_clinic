@@ -1,256 +1,304 @@
 export const brand = {
-  name: "Meridian",
-  fullName: "Meridian Dental Studio",
-  slogan: "Where precision meets care.",
-  phone: "+1 (415) 555-0142",
-  emergencyPhone: "+1 (415) 555-0199",
-  email: "hello@meridiandental.studio",
-  address: "412 Wellington Row, Suite 400, San Francisco, CA",
+  name: "Емаль",
+  wordmark: "ЕМАЛЬ",
+  fullName: "Студія естетичної стоматології «Емаль»",
+  tagline: "Естетична стоматологія",
+  city: "Київ",
+  phone: "+38 (044) 334 60 32",
+  phoneHref: "tel:+380443346032",
+  mobile: "+38 (067) 334 60 32",
+  mobileHref: "tel:+380673346032",
+  email: "hello@emal.dental",
+  address: "вул. Володимирська, 49А",
+  addressNote: "3 хвилини пішки від м. «Золоті Ворота»",
+  mapUrl: "https://maps.google.com/?q=вул.+Володимирська,+49А,+Київ",
+  instagram: "https://instagram.com",
+  facebook: "https://facebook.com",
   hours: [
-    { day: "Monday – Thursday", time: "8:00 AM – 7:00 PM" },
-    { day: "Friday", time: "8:00 AM – 5:00 PM" },
-    { day: "Saturday", time: "9:00 AM – 3:00 PM" },
-    { day: "Sunday", time: "Emergency care only" },
+    { day: "Пн – Пт", time: "9:00 – 20:00" },
+    { day: "Субота", time: "10:00 – 16:00" },
+    { day: "Неділя", time: "вихідний" },
   ],
-  story:
-    "Meridian Dental Studio was founded in 2013 by Dr. Elena Voss, who set out to build the clinic she wished existed — one where hospital-grade precision met the warmth and calm of a boutique wellness studio. What began as a single treatment room has grown into a full studio of specialists, united by the belief that exceptional dentistry should feel as good as it looks.",
-  mission:
-    "To deliver meticulous, technology-led dental care inside a space designed for genuine human comfort — treating every patient with the attention and craftsmanship we'd want for our own family.",
 };
 
-export const stats = [
-  { value: 12, suffix: "+", label: "Years of practice" },
-  { value: 8400, suffix: "+", label: "Smiles treated" },
-  { value: 15, suffix: "", label: "Specialists on staff" },
-  { value: 98, suffix: "%", label: "Patient satisfaction" },
+export const nav = [
+  { label: "Клініка", href: "#clinic" },
+  { label: "Послуги", href: "#services" },
+  { label: "Технології", href: "#technology" },
+  { label: "Лікарі", href: "#doctors" },
+  { label: "Відгуки", href: "#reviews" },
+  { label: "Питання", href: "#faq" },
+  { label: "Контакти", href: "#appointment" },
 ];
+
+export const heroTicker = [
+  "Гігієна та профілактика",
+  "Вініри й реставрації",
+  "Імплантація за 3D-протоколом",
+  "Елайнери та брекети",
+  "Лікування під мікроскопом",
+  "Відбілювання без чутливості",
+  "Дитяча стоматологія",
+];
+
+export const stats = [
+  { value: 14, suffix: "", label: "років приватної практики" },
+  { value: 11200, suffix: "+", label: "пацієнтів довірили нам посмішку" },
+  { value: 98, suffix: "%", label: "повертаються на планові огляди" },
+];
+
+export const about = {
+  eyebrow: "Клініка",
+  title: "Стоматологія, у якій спокійно",
+  paragraphs: [
+    "«Емаль» — це камерна студія на Володимирській: чотири кабінети, власна лабораторія та команда лікарів, кожен із яких займається лише своїм напрямом. Ми свідомо не стали мережею — щоб знати кожного пацієнта на імʼя і відповідати за результат особисто.",
+    "Тут не лікують «про запас» і не залякують діагнозами. Спершу — повна цифрова діагностика, потім — зрозумілий план із фіксованою вартістю. Ви завжди знаєте, що ми робимо і навіщо.",
+  ],
+  points: [
+    "Фіксуємо вартість плану лікування в договорі",
+    "Гарантія на роботи — до 5 років, письмово",
+    "Стерилізаційна зона відкрита для пацієнтів",
+  ],
+};
 
 export const services = [
   {
-    title: "General Dentistry",
+    key: "hygiene",
+    index: "01",
+    title: "Гігієна та профілактика",
     description:
-      "Comprehensive exams, cleanings, and preventive care built around your long-term oral health.",
-    icon: "Stethoscope",
+      "Ультразвук + Air Flow: делікатне професійне чищення за 60 хвилин. Це найкраща інвестиція у здоровʼя зубів.",
+    price: "від 1 900 ₴",
   },
   {
-    title: "Cosmetic Veneers",
+    key: "veneers",
+    index: "02",
+    title: "Вініри та реставрації",
     description:
-      "Hand-layered porcelain veneers crafted to match the natural translucency of your smile.",
-    icon: "Sparkles",
+      "Керамічні вініри й композитні реставрації, які не відрізнити від власних зубів — ані на фото, ані наживо.",
+    price: "від 14 000 ₴",
   },
   {
-    title: "Implantology",
+    key: "implants",
+    index: "03",
+    title: "Імплантація",
     description:
-      "Precision-guided dental implants placed with 3D imaging for a seamless, permanent result.",
-    icon: "PlusCircle",
+      "Плануємо у 3D і працюємо за хірургічним шаблоном: імплант стає точно на своє місце з першого разу.",
+    price: "від 32 000 ₴",
   },
   {
-    title: "Orthodontics",
+    key: "ortho",
+    index: "04",
+    title: "Ортодонтія",
     description:
-      "Modern clear aligners and precision braces designed around your bite and your schedule.",
-    icon: "AlignCenter",
+      "Прозорі елайнери та сучасні брекет-системи для дорослих і підлітків. Прогноз результату — ще до початку.",
+    price: "від 90 000 ₴",
   },
   {
-    title: "Teeth Whitening",
+    key: "endo",
+    index: "05",
+    title: "Лікування під мікроскопом",
     description:
-      "Studio-grade whitening treatments that lift shade safely without compromising enamel.",
-    icon: "Sun",
+      "Ендодонтія зі збільшенням ×25. Зберігаємо зуби, які в інших клініках пропонують видалити.",
+    price: "від 4 500 ₴",
   },
   {
-    title: "Root Canal Therapy",
+    key: "whitening",
+    index: "06",
+    title: "Відбілювання",
     description:
-      "Microscope-assisted endodontics that prioritize comfort, precision, and same-day relief.",
-    icon: "Activity",
+      "Кабінетні протоколи, що освітлюють емаль на 4–8 тонів за один візит — без болю та чутливості.",
+    price: "від 7 500 ₴",
   },
   {
-    title: "Pediatric Dentistry",
+    key: "kids",
+    index: "07",
+    title: "Дитяча стоматологія",
     description:
-      "Gentle, patient-led care that helps the youngest smiles feel safe from the very first visit.",
-    icon: "Heart",
-  },
-  {
-    title: "Full Smile Design",
-    description:
-      "A bespoke, multi-discipline treatment plan engineered around facial aesthetics and function.",
-    icon: "Wand2",
+      "Перший візит без сліз: адаптаційні зустрічі, ігрова форма та лікарі, які вміють домовлятися з дітьми.",
+    price: "від 900 ₴",
   },
 ];
 
-export const whyChooseUs = [
-  {
-    title: "Board-certified specialists",
-    description:
-      "Every treatment is led by a specialist in that discipline — not a single generalist wearing every hat.",
-    icon: "ShieldCheck",
+export const technology = {
+  eyebrow: "Технології",
+  title: "Обладнання, якому довіряють хірурги",
+  description:
+    "Ми оснастили студію так, щоб діагноз не залежав від припущень: усе, що потрібно для точного плану лікування, — в одному місці, за один візит.",
+  features: [
+    {
+      icon: "Scan",
+      title: "КЛКТ-томограф",
+      text: "3D-знімок усієї щелепи за 20 секунд. Доза опромінення — у 10 разів менша за плівковий знімок.",
+    },
+    {
+      icon: "Microscope",
+      title: "Операційний мікроскоп",
+      text: "Збільшення ×25 дозволяє бачити канали, невидимі неозброєним оком, і зберігати живі тканини.",
+    },
+    {
+      icon: "ScanFace",
+      title: "Інтраоральний сканер",
+      text: "Цифрові відбитки без «ложок» із гіпсом: точніше, швидше і значно комфортніше.",
+    },
+    {
+      icon: "FlaskConical",
+      title: "Власна лабораторія",
+      text: "Вініри та коронки виготовляються за стіною, а не в іншому місті. Термін — від 5 днів.",
+    },
+  ],
+  highlight: {
+    value: "×25",
+    label: "збільшення операційного мікроскопа",
   },
-  {
-    title: "In-house 3D diagnostics",
-    description:
-      "CBCT scanning and intraoral imaging on-site mean faster, more precise treatment planning.",
-    icon: "ScanLine",
-  },
-  {
-    title: "Comfort-first protocols",
-    description:
-      "Sedation options, noise-cancelling headphones, and unhurried appointments as standard.",
-    icon: "HeartHandshake",
-  },
-  {
-    title: "Transparent pricing",
-    description:
-      "Every treatment plan is quoted in full before we begin — no surprises, ever.",
-    icon: "ReceiptText",
-  },
-];
+};
 
 export const doctors = [
   {
-    name: "Dr. Elena Voss",
-    role: "Founder & Lead Prosthodontist",
-    specialization: "Full-mouth reconstruction, veneers",
-    experience: "18 years experience",
-    initials: "EV",
+    name: "Оксана Литвин",
+    role: "Засновниця, лікарка-ортопед",
+    focus: "Вініри, тотальні реконструкції посмішки",
+    experience: "18 років практики",
+    quote: "Найкраща робота — та, яку ніхто не помічає. Помічають лише посмішку.",
   },
   {
-    name: "Dr. Marcus Chen",
-    role: "Oral & Maxillofacial Surgeon",
-    specialization: "Implantology, wisdom extraction",
-    experience: "14 years experience",
-    initials: "MC",
+    name: "Андрій Коваленко",
+    role: "Хірург-імплантолог",
+    focus: "Імплантація, кісткова пластика",
+    experience: "14 років практики",
+    quote: "Імплантація — це математика. Я просто не залишаю їй шансів на випадковість.",
   },
   {
-    name: "Dr. Amara Bello",
-    role: "Orthodontic Specialist",
-    specialization: "Invisible aligners, braces",
-    experience: "11 years experience",
-    initials: "AB",
+    name: "Марія Шевчук",
+    role: "Лікарка-ортодонт",
+    focus: "Елайнери, брекет-системи",
+    experience: "11 років практики",
+    quote: "Рівні зуби — приємний бонус. Головне — здоровий прикус на все життя.",
   },
   {
-    name: "Dr. Sofia Rinaldi",
-    role: "Pediatric Dentist",
-    specialization: "Child & adolescent care",
-    experience: "9 years experience",
-    initials: "SR",
+    name: "Дмитро Бондар",
+    role: "Ендодонтист",
+    focus: "Лікування каналів під мікроскопом",
+    experience: "9 років практики",
+    quote: "Мій улюблений діагноз — «зуб вдалося зберегти».",
   },
 ];
 
-export const process = [
-  {
-    step: "01",
-    title: "Consultation",
-    description:
-      "A relaxed, in-depth conversation about your goals, history, and concerns — no rushing.",
-  },
-  {
-    step: "02",
-    title: "Digital Diagnostics",
-    description:
-      "3D imaging and scans give us a complete picture of your oral health in minutes.",
-  },
-  {
-    step: "03",
-    title: "Custom Treatment Plan",
-    description:
-      "A specialist-reviewed plan with transparent pricing and a realistic timeline.",
-  },
-  {
-    step: "04",
-    title: "Treatment",
-    description:
-      "Precision-led care delivered in a calm, private studio environment.",
-  },
-  {
-    step: "05",
-    title: "Aftercare & Maintenance",
-    description:
-      "Ongoing check-ins and maintenance plans to protect your investment for years to come.",
-  },
-];
+export const process = {
+  eyebrow: "Як усе відбувається",
+  title: "Пʼять кроків до результату",
+  steps: [
+    {
+      index: "01",
+      title: "Знайомство та огляд",
+      text: "Пʼємо каву, слухаємо, оглядаємо. Жодного навʼязування — лише чесна розмова про стан ваших зубів.",
+      duration: "45 хвилин",
+    },
+    {
+      index: "02",
+      title: "Цифрова діагностика",
+      text: "КЛКТ, фотопротокол і сканування. Повна картина стану зубів — без здогадок і «подивимось у процесі».",
+      duration: "20 хвилин",
+    },
+    {
+      index: "03",
+      title: "План і кошторис",
+      text: "Пояснюємо варіанти простою мовою, показуємо прогноз результату та фіксуємо вартість у договорі.",
+      duration: "1 візит",
+    },
+    {
+      index: "04",
+      title: "Лікування",
+      text: "Комп'ютерна анестезія та спокійний темп: більшість пацієнтів у кріслі просто дивляться серіали.",
+      duration: "за планом",
+    },
+    {
+      index: "05",
+      title: "Супровід",
+      text: "Контрольні огляди протягом року — безкоштовно. Нагадуємо про них самі, ви нічого не тримаєте в голові.",
+      duration: "12 місяців",
+    },
+  ],
+};
 
-export const testimonials = [
-  {
-    name: "Jessica Marlowe",
-    role: "Veneers patient",
-    rating: 5,
-    quote:
-      "From the first consultation I felt like the only patient in the building. The result is the most natural-looking smile I could have imagined.",
-    initials: "JM",
-  },
-  {
-    name: "David Okafor",
-    role: "Implant patient",
-    rating: 5,
-    quote:
-      "The 3D planning process alone told me I was in serious hands. Zero pain, zero surprises, and a result that feels completely my own.",
-    initials: "DO",
-  },
-  {
-    name: "Priya Nair",
-    role: "Invisalign patient",
-    rating: 5,
-    quote:
-      "Eleven months of aligners flew by. The team adjusted the plan twice without ever making me feel like a hassle.",
-    initials: "PN",
-  },
-  {
-    name: "Tom Whitfield",
-    role: "General care patient",
-    rating: 5,
-    quote:
-      "It's rare to say a dental visit felt relaxing. The studio itself is beautiful, and the care matches it.",
-    initials: "TW",
-  },
-];
+export const reviews = {
+  eyebrow: "Відгуки",
+  title: "Що кажуть пацієнти",
+  rating: "4,9",
+  ratingNote: "середня оцінка у Google за 1 200+ відгуками",
+  items: [
+    {
+      name: "Ірина Гончарук",
+      treatment: "Шість керамічних вінірів",
+      quote:
+        "Найскладнішим у всьому процесі виявилося обрати відтінок. Все інше команда зробила так, що я жодного разу не перехвилювалася. Колеги досі впевнені, що це мої «рідні» зуби.",
+    },
+    {
+      name: "Олег Мельник",
+      treatment: "Імплантація двох зубів",
+      quote:
+        "Мені показали на 3D-моделі, де саме стоятимуть імпланти, ще до операції. Сама процедура — година часу і нуль болю. Через чотири місяці вже забув, які зуби свої, а які ні.",
+    },
+    {
+      name: "Катерина Савчук",
+      treatment: "Елайнери, 14 місяців",
+      quote:
+        "Я доросла людина і брекети носити не хотіла категорично. Елайнерів на фото не видно взагалі. Марія коригувала план двічі, і жодного разу я не почула ані слова докору.",
+    },
+    {
+      name: "Тарас Литвиненко",
+      treatment: "Лікування каналів під мікроскопом",
+      quote:
+        "У двох клініках сказали видаляти. Дмитро подивився під мікроскопом і сказав: «Зберігаємо». Минуло два роки — зуб на місці й нічого не турбує.",
+    },
+  ],
+};
 
 export const faqs = [
   {
-    question: "Do you accept dental insurance?",
+    question: "Скільки коштує перша консультація?",
     answer:
-      "We work with most major PPO insurance providers and offer detailed superbills for out-of-network reimbursement. Our patient coordinators will verify your benefits before any treatment begins.",
+      "Знайомство з лікарем і первинний огляд — безкоштовні. Якщо для точного плану потрібна діагностика (КЛКТ, сканування), її вартість — 1 200 ₴, і цю суму ми зараховуємо у вартість майбутнього лікування.",
   },
   {
-    question: "What sedation options are available?",
+    question: "Це справді не боляче?",
     answer:
-      "We offer nitrous oxide, oral conscious sedation, and IV sedation for more involved procedures, each reviewed with you in advance so you can choose what feels right.",
+      "Так. Ми використовуємо компʼютерну анестезію STA: знеболення подається повільно й дозовано, тому неприємним не буває навіть сам укол. Для тривожних пацієнтів є седація — ви спокійно дрімаєте, поки ми працюємо.",
   },
   {
-    question: "How far in advance should I book?",
+    question: "Чи можна оплатити лікування частинами?",
     answer:
-      "Routine cleanings can usually be booked within a week. Cosmetic and full smile design consultations are popular, so we recommend booking 2–3 weeks ahead.",
+      "Так, для планів від 20 000 ₴ діє внутрішня розстрочка до 10 місяців без переплат і банків. Графік платежів фіксуємо в договорі разом із вартістю.",
   },
   {
-    question: "Do you treat dental emergencies?",
+    question: "Яку гарантію ви даєте?",
     answer:
-      "Yes — we hold same-day emergency slots every weekday and offer a 24/7 emergency line for existing patients.",
+      "Письмову: до 5 років на ортопедичні роботи та імплантацію, 2 роки — на реставрації. Гарантія діє за умови планових оглядів раз на пів року — ми самі нагадаємо про них.",
   },
   {
-    question: "Is financing available for larger treatment plans?",
+    question: "Скільки триває імплантація?",
     answer:
-      "We offer flexible in-house financing plans as well as third-party financing partners for treatments like implants, veneers, and full smile design.",
+      "Сама операція — 30–60 хвилин на один імплант. Повний цикл із коронкою — 3–4 місяці: стільки потрібно кістці, щоб надійно інтегрувати імплант. Тимчасову коронку за потреби ставимо одразу.",
+  },
+  {
+    question: "Як підготуватися до першого візиту?",
+    answer:
+      "Ніяк — просто приходьте. Якщо у вас є знімки чи виписки з інших клінік, візьміть їх із собою, це пришвидшить діагностику. Планувати візит натще не потрібно.",
   },
 ];
 
-export const galleryItems = [
-  { title: "Reception & Lounge", tone: "primary" },
-  { title: "Consultation Suite", tone: "secondary" },
-  { title: "Treatment Room 01", tone: "accent" },
-  { title: "3D Diagnostics Lab", tone: "ink" },
-  { title: "Recovery Lounge", tone: "secondary" },
-];
-
-export const badges = [
-  { label: "24/7 Consultation Line", icon: "PhoneCall" },
-  { label: "Emergency Same-Day Care", icon: "Siren" },
-  { label: "Online Booking", icon: "CalendarCheck" },
-];
-
-export const nav = [
-  { label: "Services", href: "#services" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Doctors", href: "#doctors" },
-  { label: "Process", href: "#process" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
-];
+export const appointment = {
+  eyebrow: "Запис",
+  title: "Заплануйте перший візит",
+  text: "Залиште номер — адміністраторка передзвонить протягом 15 хвилин у робочий час, підбере зручний слот і відповість на запитання. Це ні до чого не зобовʼязує.",
+  serviceOptions: [
+    "Консультація та огляд",
+    "Професійна гігієна",
+    "Вініри / естетика",
+    "Імплантація",
+    "Ортодонтія (елайнери, брекети)",
+    "Лікування зуба",
+    "Дитяча стоматологія",
+    "Інше питання",
+  ],
+};

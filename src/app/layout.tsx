@@ -1,40 +1,42 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Manrope, Unbounded } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
+import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingCTA } from "@/components/layout/FloatingCTA";
-import { Preloader } from "@/components/layout/Preloader";
 import { brand } from "@/lib/data";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin", "cyrillic"],
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  axes: ["opsz", "SOFT"],
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
+  subsets: ["latin", "cyrillic"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: `${brand.fullName} | Premium Dental Care`,
-  description: brand.mission,
+  title: `${brand.fullName} — ${brand.city}`,
+  description:
+    "Камерна студія естетичної стоматології в центрі Києва: цифрова діагностика, лікування під мікроскопом, вініри, імплантація. Чесні плани з фіксованою вартістю та гарантією до 5 років.",
   keywords: [
-    "dental clinic",
-    "cosmetic dentistry",
-    "dental implants",
-    "veneers",
-    "orthodontics",
+    "стоматологія Київ",
+    "естетична стоматологія",
+    "вініри",
+    "імплантація",
+    "елайнери",
+    "відбілювання зубів",
     brand.fullName,
   ],
   openGraph: {
-    title: `${brand.fullName} | ${brand.slogan}`,
-    description: brand.mission,
+    title: `${brand.fullName} — посмішка, яку хочеться показувати`,
+    description:
+      "Цифрова діагностика, лікування під мікроскопом і чесні плани з фіксованою вартістю. Київ, вул. Володимирська, 49А.",
     type: "website",
+    locale: "uk_UA",
   },
 };
 
@@ -45,15 +47,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      lang="uk"
+      className={`${manrope.variable} ${unbounded.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Preloader />
-        <Navbar />
+      <body className="flex min-h-full flex-col bg-background text-foreground">
+        <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <FloatingCTA />
       </body>
     </html>
   );
