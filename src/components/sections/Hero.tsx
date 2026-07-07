@@ -126,8 +126,10 @@ export function Hero() {
             >
               <Button href="#appointment">Записатися на візит</Button>
               <Button href={brand.phoneHref} variant="ghost" withArrow={false}>
-                <Phone className="size-4 text-cyan-500" aria-hidden />
-                {brand.phone}
+                <span className="inline-flex items-center gap-2.5">
+                  <Phone className="size-4 shrink-0 text-cyan-500" aria-hidden />
+                  {brand.phone}
+                </span>
               </Button>
             </motion.div>
 
