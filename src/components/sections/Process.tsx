@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { process } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 
 export function Process() {
+  const { process } = useContent();
   const listRef = useRef<HTMLOListElement>(null);
   const { scrollYProgress } = useScroll({
     target: listRef,
@@ -34,12 +35,11 @@ export function Process() {
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mt-6 max-w-sm leading-relaxed text-ink-500">
-                Ви завжди знаєте, що відбувається зараз і що буде далі. Жодних
-                несподіванок у кріслі та у рахунку.
+                {process.intro}
               </p>
             </Reveal>
             <Reveal delay={0.24} className="mt-9 hidden lg:block">
-              <Button href="#appointment">Почати з консультації</Button>
+              <Button href="#appointment">{process.cta}</Button>
             </Reveal>
           </div>
         </div>
@@ -82,7 +82,7 @@ export function Process() {
             ))}
           </ol>
           <Reveal className="mt-12 lg:hidden">
-            <Button href="#appointment">Почати з консультації</Button>
+            <Button href="#appointment">{process.cta}</Button>
           </Reveal>
         </div>
       </div>

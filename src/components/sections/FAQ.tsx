@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
-import { brand, faqs } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { EASE } from "@/lib/motion";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 export function FAQ() {
+  const { brand, faq } = useContent();
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -20,18 +21,17 @@ export function FAQ() {
               <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-deep-600">
                 <span className="font-display">07</span>
                 <span aria-hidden className="h-px w-10 bg-deep-600/40" />
-                Питання
+                {faq.eyebrow}
               </p>
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="font-display mt-6 max-w-md text-3xl font-medium leading-[1.12] tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
-                Те, про що питають найчастіше
+                {faq.title}
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mt-6 max-w-sm leading-relaxed text-ink-500">
-                Не знайшли своєї відповіді? Зателефонуйте — адміністраторка
-                відповість на все, що вас хвилює.
+                {faq.intro}
               </p>
             </Reveal>
             <Reveal delay={0.24}>
@@ -51,10 +51,10 @@ export function FAQ() {
 
         {/* Акордеон */}
         <RevealGroup className="lg:col-span-7" stagger={0.06}>
-          {faqs.map((faq, i) => {
+          {faq.items.map((item, i) => {
             const isOpen = open === i;
             return (
-              <RevealItem key={faq.question}>
+              <RevealItem key={item.question}>
                 <div
                   className={`border-t border-mist-300 transition-colors duration-300 last:border-b ${
                     isOpen ? "bg-white/70" : ""
@@ -71,7 +71,7 @@ export function FAQ() {
                         isOpen ? "text-deep-700" : "text-ink-900"
                       }`}
                     >
-                      {faq.question}
+                      {item.question}
                     </span>
                     <motion.span
                       animate={{ rotate: isOpen ? 135 : 0 }}
@@ -95,7 +95,7 @@ export function FAQ() {
                         className="overflow-hidden"
                       >
                         <p className="max-w-2xl px-2 pb-7 leading-relaxed text-ink-500 sm:px-4">
-                          {faq.answer}
+                          {item.answer}
                         </p>
                       </motion.div>
                     ) : null}

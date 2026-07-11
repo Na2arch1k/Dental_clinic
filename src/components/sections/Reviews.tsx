@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Star } from "lucide-react";
-import { reviews } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { avatarPhotos } from "@/lib/images";
 import { EASE } from "@/lib/motion";
 import { SectionIntro } from "@/components/ui/SectionIntro";
@@ -14,6 +14,7 @@ import { Magnetic } from "@/components/ui/Magnetic";
 const AUTOPLAY_MS = 8000;
 
 export function Reviews() {
+  const { reviews } = useContent();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const total = reviews.items.length;
@@ -90,7 +91,7 @@ export function Reviews() {
                     <span className="relative size-14 overflow-hidden rounded-full border-2 border-cyan-200">
                       <Image
                         src={avatarPhotos[index]}
-                        alt={`Фото пацієнта: ${current.name}`}
+                        alt={reviews.photoAlt(current.name)}
                         fill
                         sizes="56px"
                         className="object-cover"
@@ -117,7 +118,7 @@ export function Reviews() {
                   <button
                     type="button"
                     onClick={() => go(-1)}
-                    aria-label="Попередній відгук"
+                    aria-label={reviews.prevAria}
                     className="grid size-13 place-items-center rounded-full border border-mist-300 text-ink-700 transition-all duration-300 hover:border-deep-700 hover:bg-deep-800 hover:text-cyan-300"
                   >
                     <ArrowLeft className="size-5" aria-hidden />
@@ -127,7 +128,7 @@ export function Reviews() {
                   <button
                     type="button"
                     onClick={() => go(1)}
-                    aria-label="Наступний відгук"
+                    aria-label={reviews.nextAria}
                     className="grid size-13 place-items-center rounded-full border border-mist-300 text-ink-700 transition-all duration-300 hover:border-deep-700 hover:bg-deep-800 hover:text-cyan-300"
                   >
                     <ArrowRight className="size-5" aria-hidden />
@@ -138,14 +139,14 @@ export function Reviews() {
           </div>
 
           {/* Прогрес-смужки */}
-          <div className="mt-12 flex gap-2.5" role="tablist" aria-label="Відгуки">
+          <div className="mt-12 flex gap-2.5" role="tablist" aria-label={reviews.tablistAria}>
             {reviews.items.map((item, i) => (
               <button
                 key={item.name}
                 type="button"
                 role="tab"
                 aria-selected={i === index}
-                aria-label={`Відгук ${i + 1}: ${item.name}`}
+                aria-label={reviews.tabAria(i + 1, item.name)}
                 onClick={() => setIndex(i)}
                 className="group h-6 flex-1 max-w-24 cursor-pointer"
               >

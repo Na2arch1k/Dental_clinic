@@ -10,7 +10,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import { appointment, brand } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { EASE } from "@/lib/motion";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -20,6 +20,7 @@ const inputClass =
   "w-full rounded-xl border border-white/15 bg-white/[0.06] px-5 py-3.5 text-white placeholder:text-mist-400 backdrop-blur transition-all duration-300 focus:border-cyan-300/70 focus:bg-white/[0.09] focus:outline-none";
 
 export function Appointment() {
+  const { appointment, brand } = useContent();
   const [state, setState] = useState<FormState>("idle");
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -94,8 +95,8 @@ export function Appointment() {
                     <Clock className="size-4.5" aria-hidden />
                   </span>
                   <span>
-                    <span className="block font-semibold">Пн–Пт 9:00–20:00</span>
-                    <span className="text-sm text-mist-400">Сб 10:00–16:00 · Нд — вихідний</span>
+                    <span className="block font-semibold">{appointment.hoursWeekday}</span>
+                    <span className="text-sm text-mist-400">{appointment.hoursWeekend}</span>
                   </span>
                 </div>
               </div>
@@ -121,11 +122,10 @@ export function Appointment() {
                       <Check className="size-7" strokeWidth={3} aria-hidden />
                     </motion.span>
                     <h3 className="font-display mt-7 text-2xl font-medium">
-                      Заявку отримано
+                      {appointment.success.title}
                     </h3>
                     <p className="mt-3 max-w-sm text-mist-300">
-                      Дякуємо! Передзвонимо протягом 15 хвилин у робочий час і
-                      підберемо зручний для вас слот.
+                      {appointment.success.text}
                     </p>
                   </motion.div>
                 ) : (
@@ -138,7 +138,7 @@ export function Appointment() {
                   >
                     <div className="sm:col-span-1">
                       <label htmlFor="ap-name" className="sr-only">
-                        Ваше імʼя
+                        {appointment.form.nameLabel}
                       </label>
                       <input
                         id="ap-name"
@@ -146,13 +146,13 @@ export function Appointment() {
                         type="text"
                         required
                         autoComplete="name"
-                        placeholder="Ваше імʼя"
+                        placeholder={appointment.form.namePlaceholder}
                         className={inputClass}
                       />
                     </div>
                     <div className="sm:col-span-1">
                       <label htmlFor="ap-phone" className="sr-only">
-                        Номер телефону
+                        {appointment.form.phoneLabel}
                       </label>
                       <input
                         id="ap-phone"
@@ -160,14 +160,14 @@ export function Appointment() {
                         type="tel"
                         required
                         autoComplete="tel"
-                        placeholder="+38 (0__) ___ __ __"
+                        placeholder={appointment.form.phonePlaceholder}
                         pattern="[+0-9()\-\s]{10,20}"
                         className={inputClass}
                       />
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="ap-service" className="sr-only">
-                        Що вас цікавить
+                        {appointment.form.serviceLabel}
                       </label>
                       <select
                         id="ap-service"
@@ -177,7 +177,7 @@ export function Appointment() {
                         className={`${inputClass} appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%239db1c3' stroke-width='2'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E")] bg-[position:right_1.25rem_center] bg-no-repeat pr-12 [&>option]:text-ink-900`}
                       >
                         <option value="" disabled>
-                          Що вас цікавить?
+                          {appointment.form.servicePlaceholder}
                         </option>
                         {appointment.serviceOptions.map((option) => (
                           <option key={option} value={option}>
@@ -188,13 +188,13 @@ export function Appointment() {
                     </div>
                     <div className="sm:col-span-2">
                       <label htmlFor="ap-comment" className="sr-only">
-                        Коментар
+                        {appointment.form.commentLabel}
                       </label>
                       <textarea
                         id="ap-comment"
                         name="comment"
                         rows={3}
-                        placeholder="Коментар або зручний час для дзвінка (необовʼязково)"
+                        placeholder={appointment.form.commentPlaceholder}
                         className={`${inputClass} resize-none`}
                       />
                     </div>
@@ -213,11 +213,12 @@ export function Appointment() {
                         ) : (
                           <CalendarCheck className="size-4.5" aria-hidden />
                         )}
-                        {state === "sending" ? "Надсилаємо…" : "Надіслати заявку"}
+                        {state === "sending"
+                          ? appointment.form.submitSending
+                          : appointment.form.submitIdle}
                       </button>
                       <p className="mt-4 text-xs leading-relaxed text-mist-400">
-                        Надсилаючи заявку, ви погоджуєтеся на обробку
-                        персональних даних. Ми телефонуємо лише щодо запису.
+                        {appointment.form.disclaimer}
                       </p>
                     </div>
                   </motion.form>

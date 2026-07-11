@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   AnimatePresence,
@@ -10,10 +10,12 @@ import {
 } from "framer-motion";
 import { Menu, Phone, X } from "lucide-react";
 import { clsx } from "clsx";
-import { brand, nav } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { EASE } from "@/lib/motion";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 
 export function Header() {
+  const { brand, nav, header } = useContent();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
@@ -24,6 +26,21 @@ export function Header() {
     setScrolled(latest > 32);
     setHidden(latest > 160 && latest > prev && !open);
   });
+
+  // Блокуємо скрол сторінки та дозволяємо закрити меню клавішею Esc
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   return (
     <>
@@ -59,7 +76,7 @@ export function Header() {
             <span className="text-cyan-500">.</span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Основна навігація">
+          <nav className="hidden items-center gap-1 lg:flex" aria-label={header.navAriaLabel}>
             {nav.map((item) => (
               <Link
                 key={item.href}
@@ -76,6 +93,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <LanguageSwitcher className="hidden md:inline-flex" />
             <a
               href={brand.phoneHref}
               className="hidden items-center gap-2 text-sm font-semibold text-deep-900 transition-colors hover:text-deep-600 md:flex"
@@ -87,13 +105,15 @@ export function Header() {
               href="#appointment"
               className="hidden rounded-full bg-deep-800 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-deep-700 hover:shadow-[0_10px_28px_-10px_rgba(41,193,207,0.5)] sm:inline-flex"
             >
-              Записатися
+              {header.ctaLabel}
             </Link>
             <button
               type="button"
               onClick={() => setOpen(true)}
+              aria-expanded={open}
+              aria-haspopup="true"
               className="grid size-11 place-items-center rounded-full border border-mist-300 bg-white/70 text-deep-900 backdrop-blur transition-colors hover:border-deep-600/40 lg:hidden"
-              aria-label="Відкрити меню"
+              aria-label={header.openMenuAria}
             >
               <Menu className="size-5" aria-hidden />
             </button>
@@ -124,14 +144,17 @@ export function Header() {
                 {brand.wordmark}
                 <span className="text-cyan-400">.</span>
               </span>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="grid size-11 place-items-center rounded-full border border-white/20 transition-colors hover:border-cyan-300/60"
-                aria-label="Закрити меню"
-              >
-                <X className="size-5" aria-hidden />
-              </button>
+              <div className="flex items-center gap-3">
+                <LanguageSwitcher dark />
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="grid size-11 place-items-center rounded-full border border-white/20 transition-colors hover:border-cyan-300/60"
+                  aria-label={header.closeMenuAria}
+                >
+                  <X className="size-5" aria-hidden />
+                </button>
+              </div>
             </div>
             <motion.nav
               className="flex flex-1 flex-col justify-center gap-1 px-8"
@@ -141,7 +164,7 @@ export function Header() {
                 hidden: {},
                 visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
               }}
-              aria-label="Мобільна навігація"
+              aria-label={header.mobileNavAriaLabel}
             >
               {nav.map((item) => (
                 <motion.div
@@ -165,13 +188,22 @@ export function Header() {
                 </motion.div>
               ))}
             </motion.nav>
-            <div className="flex flex-col gap-2 px-8 pb-10 text-sm text-mist-300">
-              <a href={brand.phoneHref} className="font-semibold text-white">
-                {brand.phone}
-              </a>
-              <p>
-                {brand.address}, {brand.city}
-              </p>
+            <div className="flex flex-col gap-4 px-8 pb-10">
+              <Link
+                href="#appointment"
+                onClick={() => setOpen(false)}
+                className="inline-flex w-fit items-center rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-deep-950 transition-colors hover:bg-cyan-300"
+              >
+                {header.ctaLabel}
+              </Link>
+              <div className="flex flex-col gap-2 text-sm text-mist-300">
+                <a href={brand.phoneHref} className="font-semibold text-white">
+                  {brand.phone}
+                </a>
+                <p>
+                  {brand.address}, {brand.city}
+                </p>
+              </div>
             </div>
           </motion.div>
         ) : null}

@@ -3,7 +3,9 @@ import { Manrope, Unbounded } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { brand } from "@/lib/data";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { LanguageProvider } from "@/lib/i18n";
+import { uk } from "@/lib/content/uk";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -19,9 +21,8 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: `${brand.fullName} — ${brand.city}`,
-  description:
-    "Камерна студія естетичної стоматології в центрі Києва: цифрова діагностика, лікування під мікроскопом, вініри, імплантація. Чесні плани з фіксованою вартістю та гарантією до 5 років.",
+  title: uk.meta.title,
+  description: uk.meta.description,
   keywords: [
     "стоматологія Київ",
     "естетична стоматологія",
@@ -29,14 +30,13 @@ export const metadata: Metadata = {
     "імплантація",
     "елайнери",
     "відбілювання зубів",
-    brand.fullName,
+    uk.brand.fullName,
   ],
   openGraph: {
-    title: `${brand.fullName} — посмішка, яку хочеться показувати`,
-    description:
-      "Цифрова діагностика, лікування під мікроскопом і чесні плани з фіксованою вартістю. Київ, вул. Володимирська, 49А.",
+    title: uk.meta.ogTitle,
+    description: uk.meta.ogDescription,
     type: "website",
-    locale: "uk_UA",
+    locale: uk.meta.ogLocale,
   },
 };
 
@@ -51,9 +51,12 @@ export default function RootLayout({
       className={`${manrope.variable} ${unbounded.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <ScrollToTop />
+        </LanguageProvider>
       </body>
     </html>
   );

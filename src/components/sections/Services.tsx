@@ -10,12 +10,13 @@ import {
   useSpring,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { services } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { servicePreviews } from "@/lib/images";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 export function Services() {
+  const { services } = useContent();
   const [hovered, setHovered] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -45,9 +46,9 @@ export function Services() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionIntro
           index="02"
-          eyebrow="Послуги"
-          title="Усе для здорової посмішки — під одним дахом"
-          description="Від планової гігієни до повної реконструкції посмішки. Ціни — орієнтовні: точну вартість ви знатимете після діагностики, до початку лікування."
+          eyebrow={services.eyebrow}
+          title={services.title}
+          description={services.description}
         />
 
         <div
@@ -82,7 +83,7 @@ export function Services() {
           </AnimatePresence>
 
           <RevealGroup stagger={0.06}>
-            {services.map((service) => (
+            {services.items.map((service) => (
               <RevealItem key={service.key}>
                 <Link
                   href="#appointment"

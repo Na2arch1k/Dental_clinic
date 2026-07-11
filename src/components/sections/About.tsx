@@ -4,11 +4,12 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Check } from "lucide-react";
-import { about } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { img } from "@/lib/images";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 export function About() {
+  const { about } = useContent();
   const collageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: collageRef,
@@ -64,7 +65,7 @@ export function About() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-[0_36px_72px_-40px_rgba(11,35,71,0.5)]">
               <Image
                 src={img.clinicRoom.src}
-                alt={img.clinicRoom.alt}
+                alt={about.roomAlt}
                 fill
                 sizes="(max-width: 1024px) 90vw, 50vw"
                 className="object-cover transition-transform duration-700 ease-out hover:scale-105"
@@ -79,7 +80,7 @@ export function About() {
               <div className="relative aspect-[3/4] overflow-hidden rounded-[1.5rem] border-[6px] border-background shadow-[0_28px_56px_-32px_rgba(11,35,71,0.55)]">
                 <Image
                   src={img.clinicDetail.src}
-                  alt={img.clinicDetail.alt}
+                  alt={about.detailAlt}
                   fill
                   sizes="(max-width: 1024px) 50vw, 25vw"
                   className="object-cover"
@@ -91,9 +92,11 @@ export function About() {
             delay={0.25}
             className="absolute bottom-6 right-0 z-30 hidden max-w-[240px] rounded-2xl border border-white/70 bg-white/85 p-5 shadow-[0_24px_48px_-28px_rgba(11,35,71,0.45)] backdrop-blur-xl sm:block"
           >
-            <p className="font-display text-3xl font-semibold text-deep-800">2012</p>
+            <p className="font-display text-3xl font-semibold text-deep-800">
+              {about.milestoneYear}
+            </p>
             <p className="mt-1 text-sm leading-snug text-ink-500">
-              рік, коли ми прийняли першого пацієнта на Володимирській
+              {about.milestoneCaption}
             </p>
           </Reveal>
         </div>

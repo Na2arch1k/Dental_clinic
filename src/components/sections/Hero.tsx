@@ -10,16 +10,15 @@ import {
   useTransform,
 } from "framer-motion";
 import { Phone, ShieldCheck, Star } from "lucide-react";
-import { brand, heroTicker, stats } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { img } from "@/lib/images";
 import { EASE } from "@/lib/motion";
 import { Button } from "@/components/ui/Button";
 import { Counter } from "@/components/ui/Counter";
 import { Marquee } from "@/components/ui/Marquee";
 
-const headlineLines = ["Посмішка,", "яку хочеться", "показувати"];
-
 export function Hero() {
+  const { brand, hero } = useContent();
   const sectionRef = useRef<HTMLElement>(null);
 
   // Паралакс фото при скролі
@@ -85,11 +84,11 @@ export function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-70" />
                 <span className="relative inline-flex size-2.5 rounded-full bg-cyan-500" />
               </span>
-              Приймаємо нових пацієнтів — {brand.city}, {brand.address}
+              {hero.badgePrefix} — {brand.city}, {brand.address}
             </motion.p>
 
             <h1 className="font-display text-[2.6rem] font-semibold leading-[1.06] tracking-tight text-ink-900 sm:text-6xl xl:text-7xl">
-              {headlineLines.map((line, i) => (
+              {hero.headlineLines.map((line, i) => (
                 <span key={line} className="block overflow-hidden pb-[0.08em]">
                   <motion.span
                     className={
@@ -113,9 +112,7 @@ export function Hero() {
               transition={{ duration: 0.9, ease: EASE, delay: 0.75 }}
               className="mt-7 max-w-lg text-lg leading-relaxed text-ink-500"
             >
-              «Емаль» — студія естетичної стоматології в центрі Києва. Цифрова
-              діагностика, лікування під мікроскопом і чесні плани з фіксованою
-              вартістю — без болю, поспіху та дрібного шрифту.
+              {hero.paragraph}
             </motion.p>
 
             <motion.div
@@ -124,7 +121,7 @@ export function Hero() {
               transition={{ duration: 0.9, ease: EASE, delay: 0.9 }}
               className="mt-10 flex flex-wrap items-center gap-4"
             >
-              <Button href="#appointment">Записатися на візит</Button>
+              <Button href="#appointment">{hero.ctaPrimary}</Button>
               <Button href={brand.phoneHref} variant="ghost" withArrow={false}>
                 <span className="inline-flex items-center gap-2.5">
                   <Phone className="size-4 shrink-0 text-cyan-500" aria-hidden />
@@ -139,7 +136,7 @@ export function Hero() {
               transition={{ duration: 0.9, ease: EASE, delay: 1.05 }}
               className="mt-14 grid max-w-lg grid-cols-3 divide-x divide-mist-300"
             >
-              {stats.map((s) => (
+              {hero.stats.map((s) => (
                 <div key={s.label} className="px-4 first:pl-0 last:pr-0">
                   <dt className="sr-only">{s.label}</dt>
                   <dd className="font-display text-2xl font-semibold text-deep-800 sm:text-3xl">
@@ -164,7 +161,7 @@ export function Hero() {
               <motion.div style={{ y: imageY }} className="absolute inset-0 scale-110">
                 <Image
                   src={img.hero.src}
-                  alt={img.hero.alt}
+                  alt={hero.imageAlt}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 45vw"
@@ -190,7 +187,7 @@ export function Hero() {
                 ))}
               </div>
               <p className="font-display mt-2 text-2xl font-semibold text-deep-900">4,9</p>
-              <p className="mt-0.5 text-xs text-ink-500">1 200+ відгуків у Google</p>
+              <p className="mt-0.5 text-xs text-ink-500">{hero.ratingText}</p>
             </motion.div>
 
             {/* Чіп гарантії */}
@@ -204,7 +201,7 @@ export function Hero() {
                 <ShieldCheck className="size-4" aria-hidden />
               </span>
               <span className="text-sm font-semibold text-deep-900">
-                Гарантія до 5 років
+                {hero.guaranteeText}
               </span>
             </motion.div>
           </div>
@@ -219,7 +216,7 @@ export function Hero() {
         className="relative border-y border-mist-300/70 bg-white/50 backdrop-blur"
       >
         <Marquee className="py-4">
-          {heroTicker.map((item) => (
+          {hero.ticker.map((item) => (
             <span
               key={item}
               className="mx-6 flex items-center gap-6 text-sm font-semibold uppercase tracking-[0.22em] text-ink-700"

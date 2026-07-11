@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   FlaskConical,
@@ -6,7 +8,7 @@ import {
   ScanFace,
   type LucideIcon,
 } from "lucide-react";
-import { technology } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { img } from "@/lib/images";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
@@ -19,6 +21,7 @@ const icons: Record<string, LucideIcon> = {
 };
 
 export function Technology() {
+  const { technology } = useContent();
   return (
     <section
       id="technology"
@@ -50,7 +53,7 @@ export function Technology() {
             <div className="group relative h-72 overflow-hidden rounded-[1.5rem] border border-white/10 sm:h-96">
               <Image
                 src={img.techDigital.src}
-                alt={img.techDigital.alt}
+                alt={technology.imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 58vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -60,7 +63,7 @@ export function Technology() {
                 className="absolute inset-0 bg-gradient-to-t from-deep-950/80 via-deep-950/10 to-transparent"
               />
               <p className="absolute bottom-6 left-6 max-w-xs text-lg font-semibold leading-snug">
-                Діагноз ставить лікар. Дані для нього збирає техніка.
+                {technology.caption}
               </p>
             </div>
           </Reveal>
@@ -78,7 +81,7 @@ export function Technology() {
                   {technology.highlight.value}
                 </p>
                 <p className="mt-3 max-w-[16rem] leading-snug text-mist-300">
-                  {technology.highlight.label} — бачимо те, що не бачить око
+                  {technology.highlight.label} — {technology.highlight.suffix}
                 </p>
               </div>
             </div>

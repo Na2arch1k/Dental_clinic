@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import { clsx } from "clsx";
 import { Quote } from "lucide-react";
-import { doctors } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { doctorPhotos } from "@/lib/images";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,6 +17,7 @@ const layout = [
 ];
 
 export function Doctors() {
+  const { doctors } = useContent();
   return (
     <section id="doctors" className="relative overflow-hidden py-24 lg:py-32">
       <div
@@ -28,19 +31,19 @@ export function Doctors() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionIntro
           index="04"
-          eyebrow="Команда"
-          title="Лікарі, які займаються лише своїм напрямом"
-          description="У нас немає «універсалів». Кожен випадок веде профільний спеціаліст — тому за результат він відповідає особисто."
+          eyebrow={doctors.eyebrow}
+          title={doctors.title}
+          description={doctors.description}
         />
 
         <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-0">
-          {doctors.map((doctor, i) => (
+          {doctors.items.map((doctor, i) => (
             <Reveal key={doctor.name} delay={(i % 2) * 0.12} className={clsx(layout[i])}>
               <article className="group">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-[0_32px_64px_-40px_rgba(11,35,71,0.5)]">
                   <Image
                     src={doctorPhotos[i].src}
-                    alt={doctorPhotos[i].alt}
+                    alt={`${doctor.name} — ${doctor.role}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 45vw"
                     className="object-cover grayscale-[35%] transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"

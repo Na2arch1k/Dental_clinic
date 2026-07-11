@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight, MapPin, Phone } from "lucide-react";
-import { brand, nav } from "@/lib/data";
+import { useContent } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function Footer() {
+  const { brand, nav, footer } = useContent();
+
   return (
     <footer className="relative overflow-hidden bg-deep-950 text-white">
       <div
@@ -25,9 +29,7 @@ export function Footer() {
                 <span className="text-cyan-400">.</span>
               </p>
               <p className="max-w-sm leading-relaxed text-mist-300">
-                Камерна студія естетичної стоматології у центрі Києва. Чесні
-                плани лікування, цифрова точність і результат, за який ми
-                відповідаємо письмово.
+                {footer.description}
               </p>
               <div className="flex gap-3">
                 {[
@@ -53,9 +55,9 @@ export function Footer() {
           </Reveal>
 
           <Reveal className="lg:col-span-3" delay={0.08}>
-            <nav className="flex flex-col gap-3" aria-label="Навігація у футері">
+            <nav className="flex flex-col gap-3" aria-label={footer.sectionsLabel}>
               <p className="mb-1 text-xs font-semibold uppercase tracking-[0.28em] text-mist-400">
-                Розділи
+                {footer.sectionsLabel}
               </p>
               {nav.map((item) => (
                 <Link
@@ -72,7 +74,7 @@ export function Footer() {
           <Reveal className="lg:col-span-4" delay={0.16}>
             <div className="flex flex-col gap-4">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-mist-400">
-                Контакти
+                {footer.contactsLabel}
               </p>
               <a
                 href={brand.phoneHref}
@@ -116,8 +118,8 @@ export function Footer() {
 
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-mist-400 sm:flex-row sm:px-8">
-          <p>© 2026 {brand.fullName}. Медична ліцензія МОЗ України.</p>
-          <p>Зроблено з точністю до мікрона.</p>
+          <p>{footer.copyright}</p>
+          <p>{footer.madeWith}</p>
         </div>
       </div>
     </footer>
