@@ -83,6 +83,7 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     description: string;
+    photoPlaceholder: string;
     items: {
       name: string;
       role: string;

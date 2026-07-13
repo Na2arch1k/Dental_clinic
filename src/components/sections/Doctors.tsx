@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { clsx } from "clsx";
-import { Quote } from "lucide-react";
+import { Quote, UserRound } from "lucide-react";
 import { useContent } from "@/lib/i18n";
-import { doctorPhotos } from "@/lib/images";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -41,13 +39,20 @@ export function Doctors() {
             <Reveal key={doctor.name} delay={(i % 2) * 0.12} className={clsx(layout[i])}>
               <article className="group">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-[0_32px_64px_-40px_rgba(11,35,71,0.5)]">
-                  <Image
-                    src={doctorPhotos[i].src}
-                    alt={`${doctor.name} — ${doctor.role}`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    className="object-cover grayscale-[35%] transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
-                  />
+                  <div
+                    role="img"
+                    aria-label={`${doctor.name} — ${doctor.role}`}
+                    className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-mist-100 via-mist-200 to-mist-300 px-6 text-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  >
+                    <UserRound
+                      className="size-16 text-deep-600/40"
+                      strokeWidth={1.25}
+                      aria-hidden
+                    />
+                    <p className="max-w-[14rem] text-sm font-medium leading-snug text-deep-600/70">
+                      {doctors.photoPlaceholder}
+                    </p>
+                  </div>
                   <span className="absolute left-5 top-5 rounded-full border border-white/40 bg-white/80 px-4 py-1.5 text-xs font-semibold text-deep-900 backdrop-blur">
                     {doctor.experience}
                   </span>

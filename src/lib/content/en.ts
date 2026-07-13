@@ -194,6 +194,7 @@ export const en: SiteContent = {
     title: "Doctors who each focus on one specialty",
     description:
       "We have no generalists here. Every case is led by a dedicated specialist, so one doctor is personally accountable for the result.",
+    photoPlaceholder: "Your employees' photo could be here",
     items: [
       {
         name: "Oksana Lytvyn",
